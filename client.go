@@ -110,7 +110,9 @@ func (c *Client) sendRequestHeader(req *http.Request, v any, h *http.Header) err
 	if res.StatusCode < http.StatusOK || res.StatusCode >= http.StatusBadRequest {
 		return c.handleErrorResp(res)
 	}
+	fmt.Println(res.Header)
 	h = &res.Header
+	fmt.Println(h)
 	return decodeResponse(res.Body, v)
 }
 
