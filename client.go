@@ -79,7 +79,7 @@ func (c *Client) sendRequest(req *http.Request, v any) error {
 
 	return decodeResponse(res.Body, v)
 }
-func (c *Client) sendRequestHeader(req *http.Request, v any, h *http.Header) error {
+func (c *Client) sendRequestHeader(req *http.Request, v any) (http.Header, error) {
 	req.Header.Set("Accept", "application/json; charset=utf-8")
 	// Azure API Key authentication
 	if c.config.APIType == APITypeAzure {
@@ -102,18 +102,15 @@ func (c *Client) sendRequestHeader(req *http.Request, v any, h *http.Header) err
 
 	res, err := c.config.HTTPClient.Do(req)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	defer res.Body.Close()
 
 	if res.StatusCode < http.StatusOK || res.StatusCode >= http.StatusBadRequest {
-		return c.handleErrorResp(res)
+		return nil, c.handleErrorResp(res)
 	}
-	fmt.Println(res.Header)
-	h = &res.Header
-	fmt.Println(h)
-	return decodeResponse(res.Body, v)
+	return res.Header, decodeResponse(res.Body, v)
 }
 
 func decodeResponse(body io.Reader, v any) error {

@@ -82,6 +82,6 @@ func (c *Client) CreateChatCompletion(
 		return
 	}
 
-	err = c.sendRequestHeader(req, &response, &header)
+	header, err = c.sendRequestHeader(req, &response)
 	return
 }
