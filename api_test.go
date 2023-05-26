@@ -10,8 +10,8 @@ import (
 	"os"
 	"testing"
 
-	. "github.com/sashabaranov/go-openai"
-	"github.com/sashabaranov/go-openai/internal/test/checks"
+	. "github.com/xxxlzj520/go-openai"
+	"github.com/xxxlzj520/go-openai/internal/test/checks"
 )
 
 func TestAPI(t *testing.T) {
@@ -47,7 +47,7 @@ func TestAPI(t *testing.T) {
 	_, err = c.CreateEmbeddings(ctx, embeddingReq)
 	checks.NoError(t, err, "Embedding error")
 
-	_, err = c.CreateChatCompletion(
+	_, _, err = c.CreateChatCompletion(
 		ctx,
 		ChatCompletionRequest{
 			Model: GPT3Dot5Turbo,
@@ -62,7 +62,7 @@ func TestAPI(t *testing.T) {
 
 	checks.NoError(t, err, "CreateChatCompletion (without name) returned error")
 
-	_, err = c.CreateChatCompletion(
+	_, _, err = c.CreateChatCompletion(
 		ctx,
 		ChatCompletionRequest{
 			Model: GPT3Dot5Turbo,

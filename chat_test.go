@@ -1,9 +1,9 @@
 package openai_test
 
 import (
-	. "github.com/sashabaranov/go-openai"
-	"github.com/sashabaranov/go-openai/internal/test"
-	"github.com/sashabaranov/go-openai/internal/test/checks"
+	. "github.com/xxxlzj520/go-openai"
+	"github.com/xxxlzj520/go-openai/internal/test"
+	"github.com/xxxlzj520/go-openai/internal/test/checks"
 
 	"context"
 	"encoding/json"
@@ -32,7 +32,7 @@ func TestChatCompletionsWrongModel(t *testing.T) {
 			},
 		},
 	}
-	_, err := client.CreateChatCompletion(ctx, req)
+	_, _, err := client.CreateChatCompletion(ctx, req)
 	msg := fmt.Sprintf("CreateChatCompletion should return wrong model error, returned: %s", err)
 	checks.ErrorIs(t, err, ErrChatCompletionInvalidModel, msg)
 }
@@ -46,7 +46,7 @@ func TestChatCompletionsWithStream(t *testing.T) {
 	req := ChatCompletionRequest{
 		Stream: true,
 	}
-	_, err := client.CreateChatCompletion(ctx, req)
+	_, _, err := client.CreateChatCompletion(ctx, req)
 	checks.ErrorIs(t, err, ErrChatCompletionStreamNotSupported, "unexpected error")
 }
 
@@ -75,7 +75,7 @@ func TestChatCompletions(t *testing.T) {
 			},
 		},
 	}
-	_, err = client.CreateChatCompletion(ctx, req)
+	_, _, err = client.CreateChatCompletion(ctx, req)
 	checks.NoError(t, err, "CreateChatCompletion error")
 }
 

@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	utils "github.com/sashabaranov/go-openai/internal"
+	utils "github.com/xxxlzj520/go-openai/internal"
 )
 
 // Whisper Defines the models provided by OpenAI to use when processing audio with OpenAI.

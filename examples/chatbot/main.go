@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/sashabaranov/go-openai"
+	"github.com/xxxlzj520/go-openai"
 )
 
 func main() {
@@ -30,7 +30,7 @@ func main() {
 			Role:    openai.ChatMessageRoleUser,
 			Content: s.Text(),
 		})
-		resp, err := client.CreateChatCompletion(context.Background(), req)
+		resp, _, err := client.CreateChatCompletion(context.Background(), req)
 		if err != nil {
 			fmt.Printf("ChatCompletion error: %v\n", err)
 			continue
